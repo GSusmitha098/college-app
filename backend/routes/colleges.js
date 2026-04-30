@@ -26,20 +26,7 @@ router.get("/", (req, res) => {
   });
 });
 
-// GET college by ID
-router.get("/:id", (req, res) => {
-  const id = req.params.id;
 
-  db.query("SELECT * FROM colleges WHERE id = ?", [id], (err, result) => {
-    if (err) return res.status(500).json(err);
-
-    if (result.length === 0) {
-      return res.status(404).json({ message: "College not found" });
-    }
-
-    res.json(result[0]);
-  });
-});
 
 router.post("/save", (req, res) => {
   const { user_id, college_id } = req.body;
@@ -72,6 +59,20 @@ router.get("/saved/:userId", (req, res) => {
       res.json(result);
     }
   );
+});
+// GET college by ID
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
+
+  db.query("SELECT * FROM colleges WHERE id = ?", [id], (err, result) => {
+    if (err) return res.status(500).json(err);
+
+    if (result.length === 0) {
+      return res.status(404).json({ message: "College not found" });
+    }
+
+    res.json(result[0]);
+  });
 });
 
 module.exports = router;
