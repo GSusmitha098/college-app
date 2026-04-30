@@ -54,8 +54,9 @@ router.get("/saved/:userId", (req, res) => {
     (err, result) => {
       if (err) {
         console.log(err);
-        return res.status(500).json({ message: "Error fetching saved colleges" });
-      }
+        return res.status(500).json({ message: "Server error" });
+      } console.log("DB ERROR:", err);
+return res.status(500).json(err);
       res.json(result);
     }
   );
