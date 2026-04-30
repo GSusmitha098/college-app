@@ -1,18 +1,22 @@
 const express = require("express");
 const cors = require("cors");
+
 const authRoutes = require("./routes/auth");
 const collegeRoutes = require("./routes/colleges");
 
 const app = express();
+
+// Middleware
 app.use(cors());
 app.use(express.json());
+
+// Routes
 app.use("/auth", authRoutes);
 app.use("/colleges", collegeRoutes);
 
-const collegeRoutes = require("./routes/colleges");
+// ✅ IMPORTANT for deployment
+const PORT = process.env.PORT || 5000;
 
-app.use("/colleges", collegeRoutes);
-
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
